@@ -1,0 +1,8 @@
+{
+    "name": "cijoe automatic",
+    "description": "cijoe welcome message for Pull Requests",
+    "iconName": "cijoe-icon",
+    "categories": [
+        "cijoe"
+    ]
+}

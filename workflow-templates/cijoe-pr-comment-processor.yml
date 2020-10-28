@@ -1,0 +1,16 @@
+name: Respond to comments on PR issues
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  triggeraction:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: wixplosives/b2@v3
+        with:
+          commentText: ${{ github.event.comment.body }}
+          ref: ${{ github.ref }}
+          repo: ${{ github.repository }}
+          pull_request_id: '${{github.event.issue.number}}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.CIJOE_GITHUB_TOKEN }}
