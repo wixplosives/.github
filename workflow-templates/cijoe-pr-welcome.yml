@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: octokit/request-action@v2.x
         with:
-          route: POST /repos/:repository/issues/${{ ${{github.event.issue.number}} }}/comments
+          route: POST /repos/:repository/issues/${{github.event.issue.number}}/comments
           repository: ${{ github.repository }}
           body: |
               "Congratulations on creating new PR. My name is **@cijoe** and ill be your automation bot.
