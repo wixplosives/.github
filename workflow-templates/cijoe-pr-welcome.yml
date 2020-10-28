@@ -8,12 +8,13 @@ jobs:
     steps:
       - uses: octokit/request-action@v2.x
         with:
-          route: POST /repos/:repository/issues/${{github.event.issue.number}}/comments
+          route: POST /repos/:repository/issues/${{github.event.number}}/comments
           repository: ${{ github.repository }}
           body: |
-              "Congratulations on creating new PR. My name is **@cijoe** and ill be your automation bot.
-              There are some things i can help you with.Just type following commands to comments of this PR and ill do the rest.
-              **@cijoe measure** -  to produce benchmark measurement report for your PR
-              **@cijoe static-demo** - to generate static version of your site that you can send to other people and be proud of."
+              "Congratulations on creating new PR.\n
+              My name is **@cijoe** and ill be your automation bot.\n
+              There are some things i can help you with.Just type following commands to comments of this PR and ill do the rest.\n\n
+                **@cijoe measure** -  to produce benchmark measurement report for your PR\n
+                **@cijoe static-demo** - to generate static demo link for your project"
         env:
             GITHUB_TOKEN: ${{ secrets.CIJOE_GITHUB_TOKEN }}
