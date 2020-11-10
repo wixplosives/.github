@@ -17,6 +17,6 @@ jobs:
               ****\n
                 **@cijoe measure** -  to produce benchmark measurement report for your PR\n
                 **@cijoe static-demo** - to generate static demo link for your project\n
-                **@cijoe test-all** - to execute full test suit on all available operation systems""
+                **@cijoe test-all** - to execute full test suit on all available operation systems"
         env:
             GITHUB_TOKEN: ${{ secrets.CIJOE_GITHUB_TOKEN }}
