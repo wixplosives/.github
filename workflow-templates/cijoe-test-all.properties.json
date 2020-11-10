@@ -1,0 +1,8 @@
+{
+    "name": "cijoe test-all",
+    "description": "Triggered job that runs all tests on all operation system",
+    "iconName": "cijoe-icon",
+    "categories": [
+        "cijoe"
+    ]
+}
