@@ -12,7 +12,7 @@ jobs:
           repository: ${{ github.repository }}
           body: |
               ":tulip::sunflower: Congratulations on creating new PR:sunflower::tulip:\n
-              My name is **@cijoe** and ill be your automation bot.\n
+              My name is **@cijoe** and i'll be your automation bot.\n
               There are some things i can help you with.Just type following commands to comments of this PR and i'll do the rest.\n
               ****\n
                 **@cijoe measure** -  to produce benchmark measurement report for your PR\n
