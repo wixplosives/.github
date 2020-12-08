@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       pull_request_id:
-        description: 'Pull request number to publish results to ( github.event.issue.number ) '
+        description: 'Pull request number to publish results to ( github.event.issue.number )'
         required: false
         default: ''
 jobs:

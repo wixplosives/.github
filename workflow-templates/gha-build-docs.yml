@@ -1,0 +1,55 @@
+name: Build documentation and publish to static site
+on:
+  push:
+    tags:
+       - '*'
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      - run: echo 'Publish static site for ${{ github.repository }}  ${{ steps.get_version.outputs.VERSION }}'
+      - name: Build docs
+        run: npx @wixc3/engine-docs build 
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Notify slack failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel: chaos_test_channel
+          status: failure
+          color: bad
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+          REPOSITORY_NAME: wixplosives/static-sites
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: docs-build # The folder the action should deploy.
+          CLEAN: true # Automatically remove deleted files from the deploy branch
+          TARGET_FOLDER:  ${{ github.repository }}/${{ steps.get_version.outputs.VERSION }}
+      - name: Notify slack failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        uses: voxmedia/github-action-slack-notify-build@v1
+        with:
+          channel: chaos_test_channel
+          status: failure
+          color: bad
+      - uses: someimportantcompany/github-actions-slack-message@v1
+        if: success()
+        with:
+          channel: chaos_test_channel
+          bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
+          text: |
+            New static site published. Link: https://wixplosives.github.io/static-sites/${{ github.repository }}/${{ steps.get_version.outputs.VERSION }}/

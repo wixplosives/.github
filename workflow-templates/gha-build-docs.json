@@ -1,0 +1,8 @@
+{
+    "name": "Autoamtically build docs using @wixc3/engine-docs",
+    "description": "Triggered by tag commit, builds docs for repo and publishes them to gh static pages",
+    "iconName": "cijoe-icon",
+    "categories": [
+        "cijoe"
+    ]
+}
